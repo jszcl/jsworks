@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="content-type" charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html" />
+    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+    <title>demo</title>
+</head>
+<style type="text/css">
+*{margin:0;padding:0;}
+ul,li,img{margin:0;padding:0;border:0;list-style-type:none;}
+#list{height:250px;list-style-type:none;overflow:hidden;}
+#luanpo{max-width:300px;height:200px;border:1px solid #CCC;margin:0 auto;position:relative;overflow: hidden;}
+
+#imgs{height:200px;background:#ddd;position:absolute;}
+.a{background:red;}
+.b{background:grey;opacity: 0.5;}
+
+#num{overflow:auto;position:absolute;right:30%;bottom:0;}
+#num li{float:left;height:10px;width:10px;text-align:center;line-height:10px;border:1px solid #CCC;margin-left:10px;cursor:pointer;z-index:2222;}
+</style>
+<body>
+    <div id="luanpo">
+        <div id="imgs">
+            <img id="showimg" src="imgs/a.jpg" />
+        </div>
+        <ul id="num">
+            <li class="b"></li>
+            <li class="b"></li>
+            <li class="b"></li>
+            <li class="b"></li>
+        </ul>
+    
+    </div>
+<script type="text/javascript">
+'use strict'
+var jnums = $('#num li');
+var time = null;
+var k=0;
+var handler = function(){clearInterval(time);
+                         k=this.index;
+                        var imgindex=imglist[k];
+                           $("#showimg").attr("src",imgindex) ;
+                            timestart();
+};
+var imglist = ["imgs/a.jpg","imgs/b.jpg","imgs/c.jpg","imgs/d.jpg"]
+function clicking(){
+    
+    for (var i=0;i<jnums.length;i++){
+    jnums[i].index=i;
+    jnums[i].addEventListener("click",handler,true);
+
+    };
+   
+};
+
+
+function timestart () {
+    clearInterval(time);
+    time=setInterval(circle,3000);
+    clicking();
+
+};
+
+function circle(){
+    if (k > jnums.length-2) {
+        k = 0;
+    } else {
+        k++;
+    }
+
+    $("#showimg").attr("src",imglist[k]);
+    
+};
+timestart ();
+
+
+</script>
+</body>
+</html>
