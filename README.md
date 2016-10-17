@@ -1,2 +1,2 @@
-# jsworks
-js实践之轮播图
+﻿# jsworks
+js实践之两种轮播图
