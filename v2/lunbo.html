@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="content-type" charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html" />
+    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+    <title>demo</title>
+</head>
+<style type="text/css">
+*{margin:0;padding:0;}
+ul,li,img{margin:0;padding:0;border:0;list-style-type:none;}
+#list{height:250px;list-style-type:none;overflow:hidden;}
+#luanpo{max-width:600px;height:200px;border:1px solid #CCC;margin:0 auto;position:relative;overflow: hidden;}
+
+#imgs li{float:left;height:200px;width:600px;}
+#imgs{height:200px;background:#ddd;position:absolute;}
+.a{background:orange;}
+.b{background:grey;}
+
+#num{overflow:auto;position:absolute;right:0;bottom:0;}
+#num li{float:left;height:30px;width:30px;text-align:center;line-height:30px;border:1px solid #CCC;margin-left:10px;cursor:pointer;z-index:2222;}
+</style>
+<body>
+    <div id="luanpo">
+        <ul id="imgs">
+            <li><a href="#"><img src="imgs/a.jpg"></a></li>
+            <li>b</li>
+            <li>c</li>
+            <li>d</li>
+        </ul>
+        <ul id="num">
+            <li class="a">1</li>
+            <li class="b">2</li>
+            <li class="b">3</li>
+            <li class="b">4</li>
+        </ul>
+    
+    </div>
+<script type="text/javascript">
+'use strict'
+var imgs=document.getElementById('imgs').getElementsByTagName('li');
+var nums=document.getElementById("num").getElementsByTagName("li");
+var jnums = $('#num li')
+var luanpo=document.getElementById("luanpo");
+var oimg=document.getElementById('imgs');
+var iNow=0;
+var dt=null;
+oimg.style.width=imgs.length*imgs[0].offsetWidth+"px";
+
+function tab(){
+
+
+
+for(var i=0;i<nums.length;i++){
+    nums[i].index=i;
+    nums[i].onclick=function(){
+        clearInterval(dt);
+        iNow=this.index;
+        for(var i=0;i<nums.length;i++){
+            nums[i].className="b";        
+        }
+        this.className="a";
+        oimg.style.left=-(imgs[0].offsetWidth*iNow)+"px";    //这边可以加上我前面所写的那个缓动框架            
+    }
+    nums[i].onmouseout=function(){
+            start();
+    }
+}
+}
+
+function start(){
+　　clearInterval(dt);
+    dt=setInterval(function(){
+        if(iNow>nums.length-2){
+        iNow=0;
+        }else{
+        iNow++;
+        }
+        for(var k=0;k<nums.length;k++){
+            if(iNow==nums[k].index){nums[k].className='a';}else{nums[k].className='b';}
+        }
+        $('#imgs').animate({left:-(imgs[0].offsetWidth*iNow)+"px"},1000);
+          //这边可以加上我前面所写的那个缓动框架
+    },3000);
+    tab();
+}
+
+start();
+
+
+
+
+</script>
+
+</body>
+</html>
